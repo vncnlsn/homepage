@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home — Conceptual Layout</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.65;
+      color: #1a1a1a;
+      background: #fafafa;
+    }
+
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section {
+      padding: 70px 0;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    p {
+      max-width: 620px;
+      color: #333;
+    }
+
+    /* 1. HERO */
+    .hero {
+      background: #fff;
+      padding: 90px 0 70px;
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    .hero .tag {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #666;
+      margin-bottom: 18px;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      margin-bottom: 32px;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      background: #1a1a1a;
+      color: #fff;
+      padding: 13px 24px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    /* 2. PROOF / STATS */
+    .proof {
+      background: #f4f4f4;
+      padding: 50px 0;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .stat span {
+      font-size: 0.85rem;
+      color: #555;
+    }
+
+    /* 3. CAPABILITIES */
+    .capabilities {
+      background: #fff;
+    }
+
+    .capabilities .lead {
+      color: #555;
+      margin-bottom: 40px;
+    }
+
+    .cap-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .cap-card {
+      border: 1px solid #e5e5e5;
+      border-radius: 8px;
+      padding: 28px 26px;
+      background: #fff;
+    }
+
+    .cap-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+    }
+
+    .cap-card p {
+      font-size: 0.95rem;
+      margin-bottom: 14px;
+    }
+
+    .cap-card a {
+      font-size: 0.9rem;
+      color: #1a1a1a;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* 4. HOW WE WORK */
+    .approach {
+      background: #f7f7f7;
+    }
+
+    .approach p {
+      margin-bottom: 20px;
+    }
+
+    /* 5. PRICING HIGHLIGHT */
+    .pricing {
+      background: #1a1a1a;
+      color: #fff;
+    }
+
+    .pricing h2 {
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .pricing p {
+      color: rgba(255,255,255,0.9);
+      max-width: 520px;
+    }
+
+    .pricing .quote {
+      font-size: 1.25rem;
+      font-weight: 500;
+      margin: 28px 0 12px;
+      max-width: 560px;
+      line-height: 1.4;
+    }
+
+    /* 6. CLIENTS (light) */
+    .clients {
+      background: #fff;
+      text-align: center;
+    }
+
+    .clients p {
+      margin: 0 auto 8px;
+      color: #555;
+    }
+
+    .clients .note {
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    /* 7. FINAL CTA */
+    .final-cta {
+      background: #f4f4f4;
+      text-align: center;
+      padding: 80px 0 90px;
+    }
+
+    .final-cta h2 {
+      margin-bottom: 12px;
+    }
+
+    .final-cta p {
+      margin: 0 auto 28px;
+      max-width: 420px;
+    }
+
+    .final-cta a {
+      display: inline-block;
+      background: #1a1a1a;
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+
+    @media (max-width: 700px) {
+      .stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 28px 16px;
+      }
+      h1 {
+        font-size: 1.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="tag">Land Services &amp; Permit Acquisition</div>
+      <h1>Permit acquisition and land services for energy and infrastructure projects.</h1>
+      <p>
+        We evaluate the land, secure the access, keep the information organized, 
+        and stay involved once crews are in the field — so the work continues to match 
+        the plan, the permits, and the agreements already in place.
+      </p>
+      <a href="contact.html" class="hero-cta">Talk to APS</a>
+    </div>
+  </section>
+
+  <!-- 2. PROOF / STATS -->
+  <section class="proof">
+    <div class="container">
+      <div class="stats">
+        <div class="stat">
+          <strong>1980</strong>
+          <span>Founded</span>
+        </div>
+        <div class="stat">
+          <strong>23</strong>
+          <span>States permitted</span>
+        </div>
+        <div class="stat">
+          <strong>100s</strong>
+          <span>Projects completed</span>
+        </div>
+        <div class="stat">
+          <strong>1000s</strong>
+          <span>Square miles permitted</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. CAPABILITIES -->
+  <section class="capabilities">
+    <div class="container">
+      <h2>What We Do</h2>
+      <p class="lead">Three core capabilities. The same standard whether we handle the full project or a single piece of it.</p>
+
+      <div class="cap-grid">
+        <div class="cap-card">
+          <h3>Seismic Permitting &amp; Right-of-Way Acquisition</h3>
+          <p>
+            Proven team approach, direct manager oversight, full landowner payment services, 
+            and agency coordination across private, state, federal, and tribal lands.
+          </p>
+          <a href="services.html">Learn more →</a>
+        </div>
+
+        <div class="cap-card">
+          <h3>Title Curative</h3>
+          <p>
+            Mineral ownership research, full title searches back to sovereignty when required, 
+            and title opinions — coordinated directly with the permitting process.
+          </p>
+          <a href="services.html">Learn more →</a>
+        </div>
+
+        <div class="cap-card">
+          <h3>GIS Services</h3>
+          <p>
+            Comprehensive project databases and maps covering surface, minerals, topography, 
+            infrastructure, and ownership — kept current from evaluation through closeout.
+          </p>
+          <a href="services.html">Learn more →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. HOW WE WORK (light operational bridge) -->
+  <section class="approach">
+    <div class="container">
+      <h2>How the Work Actually Unfolds</h2>
+      <p>
+        We understand the full sequence — from first evaluation and ownership research 
+        through permitting, field support, and final closeout. 
+        We can support a project from the beginning or step in at any point along the way.
+      </p>
+      <p>
+        The details matter. Getting them right is what keeps projects moving and 
+        protects the people and land involved.
+      </p>
+    </div>
+  </section>
+
+  <!-- 5. PRICING HIGHLIGHT -->
+  <section class="pricing">
+    <div class="container">
+      <h2>How We Price</h2>
+      <p class="quote">
+        “Other firms hand you a pricing estimate. We hand you a number, turnkey, and we hold it.”
+      </p>
+      <p>No surprises on the invoice. That’s the whole idea.</p>
+    </div>
+  </section>
+
+  <!-- 6. CLIENTS (kept light) -->
+  <section class="clients">
+    <div class="container">
+      <h2>Companies We’ve Worked With</h2>
+      <p>A partial list — full roster available on request.</p>
+      <p class="note">[Client logos or names would sit here]</p>
+    </div>
+  </section>
+
+  <!-- 7. FINAL CTA -->
+  <section class="final-cta">
+    <div class="container">
+      <h2>Ready to discuss a project?</h2>
+      <p>Whether you’re planning the next one or need support on a job already underway.</p>
+      <a href="contact.html">Get in Touch</a>
+    </div>
+  </section>
+
+</body>
+</html>
