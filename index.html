@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APS Land Services — Home</title>
+  <style>
+    /* Base resets & typography */
+    :root {
+      --bg-light: #f8f9fa;
+      --bg-dark: #12181e;
+      --text-dark: #111827;
+      --text-light: #f3f4f6;
+      --accent: #c25e00;
+      --accent-hover: #9a4a00;
+      --border: #e5e7eb;
+      --border-dark: #2a3441;
+      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font-main); color: var(--text-dark); background: #ffffff; line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    
+    /* Layout utilities */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .section-padding { padding: 100px 0; }
+    .btn { display: inline-block; padding: 12px 28px; font-weight: 600; border-radius: 4px; background: var(--accent); color: #fff; transition: background 0.2s; }
+    .btn:hover { background: var(--accent-hover); }
+    .btn-outline { background: transparent; border: 1px solid var(--text-dark); color: var(--text-dark); }
+    .btn-outline:hover { background: var(--text-dark); color: #fff; }
+
+    /* Nav */
+    nav { border-bottom: 1px solid var(--border); padding: 20px 0; }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.25rem; letter-spacing: 0.5px; }
+    .logo span { font-size: 0.75rem; color: #6b7280; font-weight: 400; margin-left: 8px; }
+    nav ul { display: flex; gap: 32px; list-style: none; font-weight: 500; font-size: 0.95rem; }
+
+    /* Hero (No Video) */
+    .hero { padding: 120px 0 80px; background: #ffffff; }
+    .hero-tag { font-weight: 700; font-size: 0.85rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; display: block; }
+    .hero h1 { font-size: 3.5rem; line-height: 1.15; font-weight: 800; max-width: 900px; margin-bottom: 24px; letter-spacing: -0.02em; }
+    .hero p { font-size: 1.25rem; color: #4b5563; max-width: 720px; margin-bottom: 32px; font-weight: 400; }
+    .landowner-link { font-size: 0.95rem; color: #4b5563; border-left: 3px solid var(--accent); padding-left: 16px; margin-top: 16px; }
+    .landowner-link a { color: var(--accent); font-weight: 600; text-decoration: underline; }
+
+    /* Dark Background Transition: Reach & Map */
+    .reach-section { background: var(--bg-dark); color: var(--text-light); }
+    .reach-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .reach-text h2 { font-size: 2.75rem; line-height: 1.2; margin-bottom: 24px; font-weight: 700; }
+    .reach-text p { color: #9ca3af; font-size: 1.1rem; margin-bottom: 32px; }
+    .stats-narrative { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; border-top: 1px solid var(--border-dark); padding-top: 24px; }
+    .stat-item h3 { font-size: 2rem; color: #fff; font-weight: 700; }
+    .stat-item p { font-size: 0.875rem; color: #9ca3af; margin-bottom: 0; }
+    
+    /* Interactive Map Mockup Area */
+    .map-container { background: #1a222c; border: 1px solid var(--border-dark); border-radius: 8px; padding: 40px; text-align: center; }
+    .map-svg { width: 100%; max-width: 450px; height: auto; opacity: 0.85; }
+    .map-dot { fill: var(--accent); cursor: pointer; transition: transform 0.2s; }
+    .map-dot:hover { transform: scale(1.5); }
+
+    /* Core Pillar Sections: Services, Pricing, Safety */
+    .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 48px; }
+    .pillar-card { border: 1px solid var(--border); padding: 40px 32px; border-radius: 6px; background: #fff; }
+    .pillar-num { font-size: 0.85rem; font-weight: 700; color: var(--accent); margin-bottom: 16px; }
+    .pillar-card h3 { font-size: 1.5rem; margin-bottom: 16px; }
+    .pillar-card p { color: #4b5563; font-size: 0.95rem; margin-bottom: 20px; }
+
+    /* Marquee */
+    .marquee-section { background: var(--bg-light); padding: 60px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .marquee-title { text-align: center; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; color: #6b7280; margin-bottom: 32px; }
+    .marquee-items { display: flex; justify-content: space-between; align-items: center; opacity: 0.6; filter: grayscale(100%); }
+    .logo-box { font-weight: 700; font-size: 1.2rem; color: #374151; letter-spacing: 1px; }
+
+    /* Call to Action */
+    .cta-section { text-align: center; padding: 120px 0; background: #ffffff; }
+    .cta-section h2 { font-size: 2.75rem; margin-bottom: 16px; }
+    .cta-section p { font-size: 1.15rem; color: #4b5563; margin-bottom: 32px; }
+
+    /* Footer */
+    footer { background: var(--bg-dark); color: var(--text-light); padding: 80px 0 40px; border-top: 1px solid var(--border-dark); }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 64px; margin-bottom: 60px; }
+    .footer-brand p { color: #9ca3af; margin-top: 12px; font-size: 0.95rem; }
+    .footer-col h4 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; color: #d1d5db; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 10px; }
+    .footer-col a { color: #9ca3af; font-size: 0.95rem; }
+    .footer-col a:hover { color: #fff; }
+    .footer-bottom { border-top: 1px solid var(--border-dark); padding-top: 32px; display: flex; justify-content: space-between; font-size: 0.85rem; color: #6b7280; }
+
+    @media (max-width: 768px) {
+      .reach-grid, .pillars-grid, .footer-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="container">
+      <div class="logo">APS LAND SERVICES <span>EST. 1980</span></div>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Landowners</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <header class="hero">
+    <div class="container">
+      <span class="hero-tag">APS Land Services — Setting the Standard Since 1980</span>
+      <h1>Forty-plus years of getting permission right.</h1>
+      <p>We handle permitting, right-of-way acquisition, and field access for energy and infrastructure projects—backed by direct manager oversight and clear landowner partnerships.</p>
+      
+      <div class="landowner-link">
+        Are you a property owner with questions? <a href="#landowner-info">Read our Landowner Reassurance &amp; Rights Guide →</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- NATIONWIDE REACH & INTERACTIVE MAP (DARK BG TRANSITION) -->
+  <section class="reach-section section-padding">
+    <div class="container">
+      <div class="reach-grid">
+        <div class="reach-text">
+          <span class="hero-tag">Proven Reach</span>
+          <h2>A footprint built across four decades of work.</h2>
+          <p>We bring deep regional expertise and nationwide capacity to every project. Rather than treating territory like a numbers game, we pair scale with localized precision.</p>
+          
+          <div class="stats-narrative">
+            <div class="stat-item">
+              <h3>23 States</h3>
+              <p>Active permitting &amp; ROW history</p>
+            </div>
+            <div class="stat-item">
+              <h3>129 Counties</h3>
+              <p>Permitted in Texas alone</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Map Mockup Container -->
+        <div class="map-container">
+          <svg class="map-svg" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+            <!-- Simplified US Map Silhouette Graphic -->
+            <path d="M50,80 L120,40 L180,50 L250,30 L350,40 L450,80 L420,200 L350,250 L280,220 L200,240 L100,210 L30,150 Z" fill="#25303e" stroke="#374151" stroke-width="2"/>
+            <!-- Interactive State/Project Pins -->
+            <circle class="map-dot" cx="120" cy="110" r="8"><title>Utah — Regional Base</title></circle>
+            <circle class="map-dot" cx="240" cy="180" r="8"><title>Texas — 129 Counties</title></circle>
+            <circle class="map-dot" cx="200" cy="120" r="6"><title>Colorado Projects</title></circle>
+            <circle class="map-dot" cx="350" cy="130" r="6"><title>Pennsylvania Operations</title></circle>
+            <circle class="map-dot" cx="160" cy="80" r="6"><title>Wyoming Operations</title></circle>
+          </svg>
+          <p style="color: #6b7280; font-size: 0.8rem; margin-top: 12px;">Interactive Map Placeholder (Click dots to view regional experience)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THREE-TIERED SERVICES, PRICING & SAFETY -->
+  <section class="section-padding" style="background: var(--bg-light);">
+    <div class="container">
+      <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+        <span class="hero-tag">Capabilities &amp; Commitment</span>
+        <h2 style="font-size: 2.25rem;">Built around clarity, access, and field safety.</h2>
+      </div>
+
+      <div class="pillars-grid">
+        <!-- Service Tier -->
+        <div class="pillar-card">
+          <div class="pillar-num">01 / CAPABILITIES</div>
+          <h3>Turnkey Services</h3>
+          <p>Full-lifecycle seismic permitting, ROW acquisition, GIS mapping, and title curative. Coordinated under one roof with continuous reporting.</p>
+          <a href="#" style="font-weight: 600; font-size: 0.9rem; color: var(--accent);">Explore Services →</a>
+        </div>
+
+        <!-- Guaranteed Pricing -->
+        <div class="pillar-card">
+          <div class="pillar-num">02 / TRANSPARENCY</div>
+          <h3>Guaranteed Pricing</h3>
+          <p>No estimates that float upward mid-project. We provide one turnkey number upfront and hold it through final completion.</p>
+          <a href="#" style="font-weight: 600; font-size: 0.9rem; color: var(--accent);">Our Pricing Approach →</a>
+        </div>
+
+        <!-- Safety Statement -->
+        <div class="pillar-card">
+          <div class="pillar-num">03 / HSE SAFETY</div>
+          <h3>Safety First</h3>
+          <p>Active ISNetworld members operating under a rigorous Injury &amp; Illness Prevention Program on every single field assignment.</p>
+          <a href="#" style="font-weight: 600; font-size: 0.9rem; color: var(--accent);">View Safety Policy →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLIENT LOGO MARQUEE -->
+  <section class="marquee-section">
+    <div class="container">
+      <div class="marquee-title">Trusted by Industry Leaders Across Infrastructure &amp; Energy</div>
+      <div class="marquee-items">
+        <div class="logo-box">PARTNER LOGO 1</div>
+        <div class="logo-box">PARTNER LOGO 2</div>
+        <div class="logo-box">PARTNER LOGO 3</div>
+        <div class="logo-box">PARTNER LOGO 4</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Let’s talk about your next project.</h2>
+      <p>Whether evaluating prospective terrain or resolving active field bottlenecks, our team is ready.</p>
+      <a href="#" class="btn">Contact APS Land Services</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo" style="color: #fff;">APS LAND SERVICES</div>
+          <p>Land Services &amp; Permit Acquisition Since 1980.<br>Formerly Allstate Permit Services.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Landowners</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="#">Cache Valley, UT</a></li>
+            <li><a href="#">info@apsland.com</a></li>
+            <li><a href="#">(XXX) XXX-XXXX</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© Allstate Permit Services. All rights reserved.</span>
+        <span>APS Land Services</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
