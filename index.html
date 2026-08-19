@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>APS Land Services — Setting the Standard Since 1980</title>
-<meta name="description" content="APS Land Services provides premier land, permitting, and right-of-way acquisition services across North America since 1980.">
+<meta name="description" content="APS Land Services provides full-service energy, exploration, and infrastructure land consulting, permitting, and landowner relations across North America.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -50,7 +50,7 @@
   [data-reveal]{ opacity: 0; transform: translateY(16px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
   [data-reveal].in-view{ opacity: 1; transform: translateY(0); }
 
-  /* ================= NAV =================== */
+/* ================= NAV =================== */
   .site-nav {
     position: fixed;
     top: 0;
@@ -103,70 +103,89 @@
     .nav-logo-img { height: 32px; }
   }
 
-  /* ================= HERO ================= */
+/* ================= HERO =================== */
   .hero-section {
-    padding: calc(var(--nav-h) + clamp(48px, 6vw, 72px)) 0 clamp(48px, 6vw, 72px);
-    text-align: center;
+    padding-top: calc(var(--nav-h) + clamp(48px, 8vw, 96px));
+    padding-bottom: clamp(64px, 8vw, 108px);
     border-bottom: 1px solid var(--line);
+    text-align: center;
   }
-  .hero-section h1 {
-    font-size: clamp(2.8rem, 6vw, 4.8rem);
-    color: var(--navy);
-    line-height: 1.08;
-    margin-top: 12px;
-  }
-  .hero-sub {
-    font-size: clamp(1.1rem, 2vw, 1.35rem);
-    color: var(--ink-soft);
-    max-width: 680px;
-    margin: 20px auto 32px;
-    line-height: 1.5;
-  }
+  .hero-content { max-width: 920px; margin: 0 auto; }
+  .hero-title { font-size: clamp(2.8rem, 5.8vw, 4.6rem); color: var(--navy); line-height: 1.08; margin: 12px 0 24px; }
+  .hero-lead { font-size: clamp(1.1rem, 2vw, 1.32rem); line-height: 1.6; color: var(--ink-soft); margin: 0 0 36px; }
 
-  /* Landowner Callout Banner */
-  .landowner-banner {
+/* ================= LANDOWNER BANNER =================== */
+  .landowner-banner-wrap {
+    margin-top: clamp(32px, 4vw, 48px);
+    display: flex;
+    justify-content: center;
+  }
+  .landowner-card {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    padding: 10px 20px;
-    background: rgba(178, 58, 40, .08);
-    border: 1px solid rgba(178, 58, 40, .25);
+    gap: 16px;
+    background: rgba(178,58,40,.06);
+    border: 1px solid rgba(178,58,40,.25);
     border-radius: 4px;
-    color: var(--clay);
-    font-family: var(--mono);
-    font-size: .85rem;
-    font-weight: 600;
-    letter-spacing: .03em;
-    transition: background .25s var(--ease), border-color .25s var(--ease);
+    padding: 16px 28px;
+    transition: background .3s var(--ease), border-color .3s var(--ease), transform .25s var(--ease);
   }
-  .landowner-banner:hover {
-    background: rgba(178, 58, 40, .15);
+  .landowner-card:hover {
+    background: rgba(178,58,40,.12);
     border-color: var(--clay);
+    transform: translateY(-2px);
   }
-  .landowner-banner .arrow { transition: transform .25s var(--ease); }
-  .landowner-banner:hover .arrow { transform: translateX(4px); }
+  .landowner-card-text {
+    font-size: clamp(.95rem, 1.5vw, 1.08rem);
+    font-weight: 500;
+    color: var(--navy);
+  }
+  .landowner-btn-link {
+    font-family: var(--mono);
+    font-size: .84rem;
+    font-weight: 600;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--clay);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .landowner-btn-link .arrow { transition: transform .25s var(--ease); }
+  .landowner-card:hover .arrow { transform: translateX(4px); }
 
-  /* ================= CAPABILITIES ================= */
-  .services-section { padding: clamp(72px, 9vw, 108px) 0; }
-  .section-title { text-align: center; max-width: 640px; margin: 0 auto clamp(40px, 5vw, 60px); }
-  .section-title h2 { font-size: clamp(2rem, 3.4vw, 2.8rem); color: var(--navy); margin-top: 8px; }
+  @media (max-width: 640px) {
+    .landowner-card { flex-direction: column; text-align: center; gap: 8px; padding: 16px; }
+  }
+
+/* ================= CAPABILITIES =================== */
+  .capabilities-section { padding: clamp(80px, 9vw, 120px) 0; }
+  .section-head { text-align: center; max-width: 720px; margin: 0 auto clamp(48px, 6vw, 72px); }
+  .section-head h2 { font-size: clamp(2.2rem, 3.8vw, 3.2rem); color: var(--navy); margin-top: 8px; }
 
   .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 32px;
   }
   .service-card {
     background: var(--paper-dim);
-    padding: 32px;
-    border-radius: 4px;
+    padding: 36px 32px;
     border: 1px solid var(--line);
+    border-radius: 3px;
+    transition: transform .3s var(--ease), box-shadow .3s var(--ease);
   }
-  .service-card h3 { font-size: 1.35rem; color: var(--navy); margin-bottom: 12px; }
-  .service-card p { font-size: .98rem; line-height: 1.6; color: var(--ink-soft); margin: 0; }
+  .service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,.06); }
+  .service-card h3 { font-size: 1.45rem; color: var(--navy); margin-bottom: 12px; }
+  .service-card p { font-size: .98rem; line-height: 1.62; color: var(--ink-soft); margin: 0; }
 
-  /* ================= CTA + FOOTER ================= */
-  .cta-band { background: var(--navy-deep); padding: clamp(64px, 7vw, 92px) 0; }
+/* ================= CLIENTS =================== */
+  .clients-section { background: var(--navy-deep); color: var(--paper); padding: clamp(80px, 9vw, 120px) 0; }
+  .clients-section .section-head h2 { color: var(--paper); }
+  .clients-section .section-head p { color: var(--paper-soft); font-size: 1.05rem; line-height: 1.6; margin-top: 12px; }
+
+/* ================= CTA & FOOTER =================== */
+  .cta-band { background: var(--navy-deep); border-top: 1px solid var(--line-on-navy); padding: clamp(64px, 7vw, 92px) 0; }
   .cta-inner { display:flex; flex-direction:column; align-items:center; justify-content:center; gap: clamp(24px, 3vw, 32px); text-align:center; }
   .cta-inner h2 { font-size: clamp(1.6rem, 2.8vw, 2.2rem); color: var(--paper); }
   .cta-actions { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap: 16px; }
@@ -222,35 +241,52 @@
   </ul>
 </nav>
 
-<!-- HERO SECTION -->
-<header class="hero-section shell" data-reveal>
-  <span class="eyebrow">Setting the Standard Since 1980</span>
-  <h1>Land &amp; Permitting Expertise Across North America</h1>
-  <p class="hero-sub">Comprehensive land services, right-of-way acquisition, and environmental permitting tailored for energy, infrastructure, and exploration projects.</p>
-  
-  <a href="about.html#control-section" class="landowner-banner">
-    Contacted by APS? Start here <span class="arrow">→</span>
-  </a>
-</header>
+<!-- HERO -->
+<section class="hero-section shell">
+  <div class="hero-content" data-reveal>
+    <span class="eyebrow">Setting the Standard Since 1980</span>
+    <h1 class="hero-title">Precision Land Services &amp; Permitting Across North America</h1>
+    <p class="hero-lead">Comprehensive land acquisition, permitting, and regulatory management for energy, exploration, and infrastructure projects across 23 states and Canada.</p>
+    
+    <!-- LANDOWNER REDIRECT CARD -->
+    <div class="landowner-banner-wrap">
+      <a href="about.html#landowners" class="landowner-card" aria-label="Contacted by APS? Start here to visit the landowner section on our about page">
+        <span class="landowner-card-text">Have questions regarding a project in your area?</span>
+        <span class="landowner-btn-link">Contacted by APS? Start here <span class="arrow">→</span></span>
+      </a>
+    </div>
+  </div>
+</section>
 
 <!-- CAPABILITIES -->
-<section class="services-section shell" id="capabilities">
-  <div class="section-title" data-reveal>
-    <span class="eyebrow">Capabilities</span>
-    <h2>Services Built on Decades of Experience</h2>
+<section class="capabilities-section shell" id="capabilities">
+  <div class="section-head" data-reveal>
+    <span class="eyebrow">Core Capabilities</span>
+    <h2>Built on Experience</h2>
   </div>
   <div class="services-grid">
-    <div class="service-card" data-reveal>
-      <h3>Surface Permitting &amp; ROW</h3>
-      <p>Negotiating right-of-way agreements, mineral leases, and surface access across private, state, federal, and tribal lands.</p>
-    </div>
-    <div class="service-card" data-reveal>
-      <h3>Landowner Relations</h3>
-      <p>Direct, transparent communication ensuring landowners stay informed, respected, and in full control of their property.</p>
-    </div>
-    <div class="service-card" data-reveal>
-      <h3>Project Management</h3>
-      <p>End-to-end management of field crews, agency compliance, and title research across North America.</p>
+    <article class="service-card" data-reveal>
+      <h3>Landowner Relations &amp; Permitting</h3>
+      <p>Direct outreach, clear communication, and transparent negotiations tailored to protect landowner integrity while securing project access.</p>
+    </article>
+    <article class="service-card" data-reveal>
+      <h3>Seismic &amp; Exploration Access</h3>
+      <p>Decades of field-tested experience in surface permitting and logistical coordination for complex geophysical and exploration campaigns.</p>
+    </article>
+    <article class="service-card" data-reveal>
+      <h3>Regulatory &amp; Right-of-Way</h3>
+      <p>Seamless management across private, state, federal, and tribal agencies to ensure full regulatory compliance from start to finish.</p>
+    </article>
+  </div>
+</section>
+
+<!-- CLIENTS & REPRESENTATION -->
+<section class="clients-section" id="clients">
+  <div class="shell">
+    <div class="section-head" data-reveal>
+      <span class="eyebrow eyebrow-on-navy">Track Record</span>
+      <h2>Companies We've Represented</h2>
+      <p>Over four decades of reliable execution across hundreds of landmark energy and infrastructure endeavors.</p>
     </div>
   </div>
 </section>
@@ -258,7 +294,7 @@
 <!-- CTA & FOOTER -->
 <section class="cta-band">
   <div class="shell cta-inner" data-reveal>
-    <h2>Ready to advance your project?</h2>
+    <h2>Ready when you are.</h2>
     <div class="cta-actions">
       <a class="cta-btn" href="tel:+13039035873">Call 303-903-5873 <span class="arrow">→</span></a>
       <a class="cta-btn" href="mailto:allstatepermit@allstatepermit.com">Email allstatepermit@allstatepermit.com <span class="arrow">→</span></a>
