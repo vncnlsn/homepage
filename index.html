@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="icon" type="image/jpeg" href="assets/APS_favicon_2.jpg">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>APS Land Services — Permit Acquisition &amp; Land Services Since 1980</title>
+<title>APS Land Services est. 1980</title>
 <meta name="description" content="APS Land Services delivers seismic permitting, right-of-way acquisition, title curative, and GIS services for energy and exploration projects nationwide. Setting the standard since 1980.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,8 +24,7 @@
     --line:        rgba(28,27,24,.14);
     --line-on-navy: rgba(250,246,234,.16);
     /* Map accent — restrained instrument-panel signal, deliberately kept
-       separate from the clay/brass site palette. See about.html for the
-       same rationale. */
+       separate from the clay/brass site palette. */
     --glow:        #55D6C4;
     --glow-strong: #7CE8D9;
     --glow-dim:    rgba(85,214,196,.22);
@@ -39,9 +39,8 @@
 
   *{ box-sizing: border-box; }
   html{ scroll-behavior: smooth; }
-  body{ margin:0; background: var(--paper); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+  body{ margin:0; background: var(--paper); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
   img{ max-width:100%; display:block; }
-  .visually-hidden{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
   a{ color:inherit; text-decoration:none; }
   ::selection{ background: var(--clay); color: var(--paper); }
   :focus-visible{ outline: 2px solid var(--brass); outline-offset: 3px; }
@@ -55,43 +54,57 @@
   [data-reveal]{ opacity: 0; transform: translateY(16px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
   [data-reveal].in-view{ opacity: 1; transform: translateY(0); }
 
-  /* ================= NAV ================= */
-  .site-nav{ position: fixed; top:0; left:0; right:0; z-index: 200; height: var(--nav-h); background: var(--navy-deep); border-bottom: 1px solid var(--line-on-navy); box-shadow: 0 4px 18px rgba(0,0,0,.14); transition: box-shadow .35s var(--ease); }
-  .site-nav.scrolled{ box-shadow: 0 8px 26px rgba(0,0,0,.22); }
-  .nav-inner{ max-width: 1680px; height: 100%; margin: 0 auto; padding: 0 clamp(24px, 5vw, 96px); display:grid; grid-template-columns: 1fr auto 1fr; align-items:center; gap: 24px; }
-  .nav-center{ grid-column: 2; display:flex; align-items:center; justify-content:center; gap: clamp(40px, 5.2vw, 68px); }
-  .nav-logo{ flex:0 0 auto; display:flex; align-items:center; }
-  /* Logo is rendered navy-on-transparent; brightness(0) invert(1) recolors
-     the entire mark to solid white so it reads clearly against the deep
-     navy nav bar. Sized up from the source crop but constrained to the
-     fixed nav height so the bar itself never grows. */
-  .nav-logo-img{ height: 46px; width:auto; max-height: calc(var(--nav-h) - 26px); display:block; filter: brightness(0) invert(1); }
-  .nav-logo-fallback{ font-family: var(--serif); font-weight: 600; font-size: 1.28rem; color: var(--paper); }
-  .nav-links{ list-style:none; display:flex; align-items:center; gap: clamp(28px, 3.6vw, 48px); margin:0; padding:0; }
-  .nav-links a{ font-size: .86rem; letter-spacing: .03em; font-weight: 500; color: var(--paper-soft); position:relative; padding-bottom: 6px; white-space: nowrap; }
-  .nav-links a.current{ color: var(--clay-bright); }
-  .nav-links a::after{ content:""; position:absolute; left:0; right:0; bottom:0; height:1px; background: var(--clay-bright); transform: scaleX(0); transform-origin: left; transition: transform .35s var(--ease); }
-  .nav-links a:hover{ color: var(--paper); }
-  .nav-links a:hover::after, .nav-links a:focus-visible::after, .nav-links a.current::after{ transform: scaleX(1); }
-  .nav-toggle{ grid-column: 3; justify-self:end; display:none; background:none; border:0; padding:8px; cursor:pointer; }
-  .nav-toggle-bar{ display:block; width:22px; height:2px; background: var(--paper-soft); margin: 4px 0; transition: transform .3s var(--ease), opacity .3s var(--ease); }
-  .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1){ transform: translateY(6px) rotate(45deg); }
-  .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2){ opacity:0; }
-  .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3){ transform: translateY(-6px) rotate(-45deg); }
-  .nav-mobile-panel{ display:none; position:fixed; top: var(--nav-h); left:0; right:0; background: var(--navy-deep); border-bottom: 1px solid var(--line-on-navy); box-shadow: 0 14px 30px rgba(0,0,0,.28); z-index:199; }
-  .nav-mobile-panel.open{ display:block; }
-  .nav-mobile-panel ul{ list-style:none; margin:0; padding: 12px 24px 20px; }
-  .nav-mobile-panel li{ border-top: 1px solid var(--line-on-navy); }
-  .nav-mobile-panel li:first-child{ border-top:none; }
-  .nav-mobile-panel a{ display:block; padding: 16px 4px; font-size: .96rem; font-weight:500; color: var(--paper-soft); }
-  .nav-mobile-panel a.current{ color: var(--clay-bright); }
+/* ================= NAV ================= */
+  .site-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+    height: var(--nav-h);
+    background: var(--navy-deep);
+    border-bottom: 1px solid var(--line-on-navy);
+    box-shadow: 0 4px 18px rgba(0,0,0,.14);
+    transition: box-shadow .35s var(--ease);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .site-nav.scrolled { box-shadow: 0 8px 26px rgba(0,0,0,.22); }
 
-  @media (max-width: 780px){ .shell{ padding: 0 24px; } .nav-inner{ padding: 0 20px; gap: 20px; } }
-  @media (max-width: 640px){
-    .nav-links{ display:none; }
-    .nav-toggle{ display:block; }
-    :root{ --nav-h: 64px; }
-    .nav-logo-img{ height: 36px; }
+  .nav-menu-centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(28px, 5.5vw, 68px);
+    list-style: none;
+    margin: 0;
+    padding: 0 24px;
+  }
+
+  .nav-logo { display: flex; align-items: center; justify-content: center; }
+  .nav-logo-img { height: 44px; width: auto; max-height: calc(var(--nav-h) - 22px); display: block; filter: brightness(0) invert(1); }
+  .nav-logo-fallback { font-family: var(--serif); font-weight: 600; font-size: 1.35rem; color: var(--paper); }
+
+  .nav-link {
+    font-family: var(--mono);
+    font-size: .88rem;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--paper-soft);
+    transition: color .25s var(--ease);
+    white-space: nowrap;
+  }
+  .nav-link:hover,
+  .nav-link.active {
+    color: var(--clay-bright);
+  }
+
+  @media (max-width: 768px) {
+    .nav-menu-centered { gap: 18px; padding: 0 16px; }
+    .nav-link { font-size: .74rem; letter-spacing: .05em; }
+    .nav-logo-img { height: 32px; }
   }
 
   /* ================= HERO ================= */
@@ -102,7 +115,7 @@
     display:flex;
     flex-direction:column;
     justify-content:center;
-    padding: calc(var(--nav-h) + clamp(32px, 5vw, 56px)) 0 clamp(120px, 14vw, 168px);
+    padding: calc(var(--nav-h) + clamp(32px, 5vw, 56px)) 0 clamp(80px, 10vw, 120px);
     text-align:center;
   }
 
@@ -131,47 +144,38 @@
     flex-wrap:wrap;
     align-items:center;
     justify-content:center;
-    gap: 12px 0;
+    gap: 14px 0;
     width: 100%;
-    max-width: 900px;
+    max-width: 960px;
     margin: clamp(64px, 8vw, 96px) auto 0;
-    padding: clamp(24px, 3vw, 30px) 0;
+    padding: clamp(26px, 3.2vw, 34px) 0;
     border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
   }
-  .hero-capabilities span:not(.hero-sep){ font-family: var(--mono); font-size: .76rem; letter-spacing: .08em; text-transform: uppercase; color: var(--navy); font-weight:600; }
-  .hero-sep{ width:1px; height: 11px; background: var(--brass); opacity:.5; display:inline-block; margin: 0 20px; }
-
-  /* --- Zone 4: Landowner utility — quiet, lower-corner navigation --- */
-  .hero-landowner{
-    position: absolute;
-    right: 56px;
-    bottom: clamp(28px, 4vw, 44px);
-    display:inline-flex;
-    align-items:center;
-    gap: 6px;
+  .hero-cap-link{
     font-family: var(--mono);
-    font-size: .72rem;
-    letter-spacing: .04em;
+    font-size: .92rem;
+    letter-spacing: .06em;
     text-transform: uppercase;
-    font-weight:600;
-    color: var(--ink-soft);
-    border-bottom: 1px solid var(--line);
+    color: var(--navy);
+    font-weight: 700;
+    position: relative;
     padding-bottom: 3px;
-    transition: color .25s var(--ease), border-color .25s var(--ease);
+    transition: color .25s var(--ease);
   }
-  .hero-landowner:hover{ color: var(--clay); border-color: var(--clay); }
-  .hero-landowner .arrow{ transition: transform .25s var(--ease); display:inline-block; }
-  .hero-landowner:hover .arrow{ transform: translateX(3px); }
+  .hero-cap-link::after{
+    content:"";
+    position:absolute; left:0; right:100%; bottom:0; height:2px; background: var(--clay);
+    transition: right .3s var(--ease);
+  }
+  .hero-cap-link:hover{ color: var(--clay); }
+  .hero-cap-link:hover::after{ right:0; }
+  .hero-sep{ width:1px; height: 13px; background: var(--brass); opacity:.5; display:inline-block; margin: 0 22px; }
 
-  @media (max-width: 780px){
-    .hero-landowner{ right: 24px; bottom: 22px; }
-  }
   @media (max-width: 640px){
-    .hero-capabilities{ gap: 12px 0; }
+    .hero-capabilities{ gap: 16px 0; }
     .hero-sep{ display:none; }
-    .hero-capabilities span:not(.hero-sep){ width: 100%; }
-    .hero-landowner{ font-size: .66rem; right: 20px; bottom: 18px; }
+    .hero-cap-link{ width: 100%; font-size: .82rem; }
   }
 
   /* ================= FOOTPRINT (map section) ================= */
@@ -186,21 +190,20 @@
   .stat-divider{ width:1px; align-self:stretch; background: var(--line-on-navy); display:block; }
   @media (max-width: 780px){ .stat-divider{ display:none; } .footprint-stats{ gap: 24px; } .footprint-stats .stat{ align-items:center; text-align:center; } }
 
-  /* Outer layout: reserved western gutter for the info card (panel) plus
-     the map stage. Flex siblings — the card can never sit on top of the
-     geography because it isn't part of the same box. */
+  /* Outer layout: map stage centered in the frame. On desktop the
+     state-info panel is an absolutely-positioned overlay anchored to
+     the top of the map stage (near the ND/MN area) rather than a
+     separate grid column, so it reads as a label floating over the
+     geography instead of a sidebar next to it. */
   .map-canvas-wrap{
     display:flex;
-    align-items:center;
     justify-content:center;
-    gap: clamp(28px, 3.4vw, 52px);
     max-width: 1780px;
     margin: 0 auto;
   }
 
   .map-stage{
     position: relative;
-    flex: 1 1 auto;
     height: min(64vh, 700px);
     width: auto;
     max-width: 1520px;
@@ -223,7 +226,10 @@
     transition: fill .35s var(--ease), stroke .3s var(--ease);
     transform-box: fill-box;
     transform-origin: center;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
   }
+  .map-canvas path:focus{ outline: none; }
   .map-canvas path.covered{ fill: rgba(85,214,196,.22); stroke: rgba(250,246,234,.16); }
   .map-canvas path.covered.hovered,
   .map-canvas path.covered.pinned{
@@ -239,7 +245,8 @@
     transition: fill .9s var(--ease), stroke .9s var(--ease);
   }
 
-  .hq-marker{ cursor: pointer; }
+  .hq-marker{ cursor: pointer; -webkit-tap-highlight-color: transparent; outline: none; }
+  .hq-marker:focus{ outline: none; }
   .hq-ring{
     fill: none;
     stroke: rgba(217,117,95,.4);
@@ -262,45 +269,59 @@
   .hq-marker:hover .hq-ring,
   .hq-marker.pinned .hq-ring{ stroke: var(--glow-line); }
 
-  /* Info card: a fixed-width flex sibling to the west of the map stage,
-     never absolutely positioned over the geography. Width is generous
-     enough that "Pennsylvania" / "West Virginia" never wrap or crowd
-     back toward the SVG. */
+  /* Info card: on desktop this floats as an absolutely positioned
+     overlay near the top of the map stage (roughly over the ND/MN
+     area), centered horizontally rather than sitting in its own
+     sidebar column. */
   .map-state-panel{
-    flex: 0 0 236px;
-    width: 236px;
+    position: absolute;
+    top: clamp(-6px, -1vw, 4px);
+    left: 54%;
+    transform: translateX(-50%) translateY(-4px);
+    width: 240px;
     padding: 12px 20px;
     background: rgba(22,34,44,.85);
-    border-left: 2px solid var(--glow-line);
+    border-top: 2px solid var(--glow-line);
     box-shadow: 0 12px 30px rgba(0,0,0,.35);
     -webkit-backdrop-filter: blur(6px);
     backdrop-filter: blur(6px);
     opacity: 0;
-    transform: translateY(-4px);
     transition: opacity .25s var(--ease), transform .25s var(--ease);
     pointer-events: none;
-    text-align:left;
+    text-align:center;
   }
-  .map-state-panel.msp-visible{ opacity: 1; transform: translateY(0); }
+  .map-state-panel.msp-visible{ opacity: 1; transform: translateX(-50%) translateY(0); }
+  .msp-hq-label{ display:none; font-family: var(--mono); font-weight: 600; font-size: .66rem; letter-spacing:.12em; text-transform:uppercase; color: var(--glow-strong); }
+  .msp-hq-rule{ display:none; width: 28px; height: 1px; background: var(--glow-line); margin: 7px auto; }
+  .map-state-panel.msp-hq .msp-hq-label,
+  .map-state-panel.msp-hq .msp-hq-rule{ display:block; }
   .msp-name{ display:block; font-family: var(--serif); font-weight: 500; font-size: 1.05rem; color: var(--paper); white-space: nowrap; }
-  .msp-county{ display:none; font-family: var(--mono); font-weight: 500; font-size: .74rem; letter-spacing:.04em; text-transform:uppercase; color: var(--glow-strong); text-align:left; margin-top: 5px; }
+  .msp-county{ display:none; font-family: var(--mono); font-weight: 500; font-size: .74rem; letter-spacing:.04em; text-transform:uppercase; color: var(--glow-strong); text-align:center; margin-top: 5px; }
   .msp-county.msp-county-visible{ display:block; }
 
   @media (max-width: 1280px){
-    .map-canvas-wrap{ flex-direction:column; gap: 18px; }
+    .map-canvas-wrap{ display:flex; flex-direction:column; gap: 18px; }
     .map-stage{ order:1; max-width: 1100px; height: min(50vh, 560px); }
     .map-state-panel{
       order:2;
-      flex: 0 0 auto;
+      position: static;
+      transform: none;
       width:auto;
       max-width: 320px;
       margin: 0 auto;
-      border-left:none;
-      border-top: 2px solid var(--glow-line);
       text-align:center;
     }
+    .map-state-panel.msp-visible{ transform: none; }
     .msp-name{ white-space: normal; }
-    .msp-county{ text-align:center; }
+  }
+
+  /* Portrait / narrow phones: the map must be driven by the available
+     WIDTH, not viewport height — otherwise a tall, narrow viewport
+     forces an oversized width from the fixed aspect-ratio and the map
+     overflows the screen horizontally. Below this breakpoint the stage
+     goes full-width-with-gutter and height is derived from that width. */
+  @media (max-width: 640px){
+    .map-stage{ width: 100%; max-width: 100%; height: auto; }
   }
 
   /* ================= CAPABILITIES ================= */
@@ -320,15 +341,27 @@
     transition: transform .3s var(--ease), box-shadow .3s var(--ease);
   }
   .cap-card:hover{ transform: translateY(-3px); box-shadow: 0 2px 4px rgba(34,28,21,.05), 0 14px 28px rgba(34,28,21,.08); }
-  .cap-card h3{ font-size: 1.18rem; color: var(--navy); line-height:1.3; margin-bottom: 20px; }
+  .cap-card h3{ 
+    font-size: 1.18rem; 
+    color: var(--navy); 
+    line-height:1.3; 
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: .04em;
+  }
   .cap-list{ list-style:none; margin:0 0 24px; padding:0; }
   .cap-list li{ font-size: .92rem; color: var(--ink-soft); padding: 10px 0; border-top: 1px solid var(--line); }
   .cap-list li:first-child{ border-top:none; padding-top:0; }
   .cap-contrast{ font-family: var(--serif); font-style: italic; font-weight:500; font-size: 1.05rem; color: var(--clay); line-height:1.45; margin: 0 0 24px; }
-  .cap-close{ font-family: var(--mono); font-size: .74rem; letter-spacing: .03em; color: var(--brass); line-height:1.6; margin: auto 0 0; padding-top: 18px; border-top: 1px solid var(--line); }
-  .isn-badge-placeholder{ display:flex; align-items:center; gap: 10px; margin-top: 20px; }
-  .isn-badge-mark{ font-family: var(--mono); font-size: .62rem; font-weight:600; letter-spacing:.04em; color: var(--paper); background: var(--navy); padding: 5px 8px; border-radius: 2px; }
-  .isn-caption{ font-size: .74rem; color: var(--ink-soft); }
+  .cap-close{ font-family: var(--mono); font-size: .74rem; letter-spacing: .03em; color: var(--brass); line-height:1.6; min-height: 3.2em; margin: auto 0 0; padding-top: 18px; border-top: 1px solid var(--line); }
+  .cap-card .cta-btn {
+    margin-top: 16px;
+    justify-content: center;
+    text-align: center;
+    background: var(--navy);
+    border-color: var(--navy);
+  }
 
   @media (max-width: 900px){ .capabilities-grid{ grid-template-columns: 1fr; } }
 
@@ -338,29 +371,28 @@
   .marquee-viewport{
     position:relative; overflow:hidden;
     border-top: 1px solid var(--paper-dim); border-bottom: 1px solid var(--paper-dim);
+    cursor: grab;
+    touch-action: pan-y;
   }
+  .marquee-viewport.dragging{ cursor: grabbing; }
   .marquee-viewport::before, .marquee-viewport::after{
     content:""; position:absolute; top:0; bottom:0; width: 80px; z-index:2; pointer-events:none;
   }
   .marquee-viewport::before{ left:0; background: linear-gradient(to right, var(--paper), rgba(250,246,234,0)); }
   .marquee-viewport::after{ right:0; background: linear-gradient(to left, var(--paper), rgba(250,246,234,0)); }
-  .marquee-track{ display:flex; align-items:stretch; width: max-content; animation: scroll-left 52s linear infinite; }
-  .marquee-track-reverse{ animation-name: scroll-right; animation-duration: 58s; }
-  .marquee-viewport:hover .marquee-track{ animation-play-state: paused; }
-  @keyframes scroll-left{ from{ transform: translateX(0); } to{ transform: translateX(-50%); } }
-  @keyframes scroll-right{ from{ transform: translateX(-50%); } to{ transform: translateX(0); } }
+  .marquee-track{ display:flex; align-items:stretch; width: max-content; will-change: transform; }
   .logo-cell{
     flex: 0 0 auto; height: 76px; display:flex; align-items:center; justify-content:center;
     padding: 0 32px; border-right: 1px solid var(--paper-dim);
     font-family: var(--serif); font-style: italic; font-weight: 500; font-size: .96rem;
-    color: var(--ink-soft); white-space: nowrap;
+    color: var(--ink-soft); white-space: nowrap; user-select: none;
   }
-  @media (prefers-reduced-motion: reduce){ .marquee-track{ animation: none; } }
 
   /* ================= CTA + FOOTER ================= */
   .cta-band{ background: var(--navy-deep); padding: clamp(64px, 7vw, 92px) 0; }
   .cta-inner{ display:flex; flex-direction:column; align-items:center; justify-content:center; gap: clamp(24px, 3vw, 32px); text-align:center; }
   .cta-inner h2{ font-size: clamp(1.6rem, 2.8vw, 2.2rem); color: var(--paper); }
+  .cta-actions{ display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap: 16px; }
   .cta-btn{
     display:inline-flex; align-items:center; gap: 12px; padding: 15px 28px;
     border: 1px solid var(--paper-soft); color: var(--paper);
@@ -371,56 +403,57 @@
   .cta-btn .arrow{ transition: transform .25s var(--ease); }
   .cta-btn:hover .arrow{ transform: translateX(4px); }
 
-  footer{ background: var(--navy-deep); color: var(--paper); padding: 64px 0 32px; }
-  .footer-grid{ display:grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 44px; border-bottom: 1px solid var(--line-on-navy); }
-  .footer-brand{ display:block; }
-  .footer-logo-img{ height: 32px; width:auto; filter: brightness(0) invert(1); margin-bottom: 12px; }
-  .footer-brand-fallback{ display:none; font-family: var(--serif); font-weight:600; font-size: 1.24rem; color: var(--paper); margin-bottom: 10px; }
-  .footer-brand p{ font-size: .86rem; color: var(--paper-soft); max-width: 220px; line-height:1.6; font-family: var(--sans); margin:0; }
-  footer h4{ font-family: var(--mono); font-size: .66rem; letter-spacing: .08em; text-transform: uppercase; color: var(--clay-bright); margin: 0 0 14px; font-weight:500; }
+  footer{ background: var(--navy-deep); color: var(--paper); padding: 44px 0 26px; }
+  .footer-grid{ display:flex; flex-wrap:wrap; justify-content:center; gap: 48px clamp(48px, 6vw, 88px); padding-bottom: 30px; border-bottom: 1px solid var(--line-on-navy); text-align:center; }
+  .footer-brand{ display:flex; flex-direction:column; align-items:center; }
+  .footer-logo-img{ height: 28px; width:auto; filter: brightness(0) invert(1); margin: 0 auto 10px; }
+  .footer-brand-fallback{ display:none; font-family: var(--serif); font-weight:600; font-size: 1.15rem; color: var(--paper); margin-bottom: 8px; }
+  .footer-brand p{ font-size: .82rem; color: var(--paper-soft); max-width: 220px; line-height:1.6; font-family: var(--sans); margin: 0 auto; }
+  footer h4{ font-family: var(--mono); font-size: .64rem; letter-spacing: .08em; text-transform: uppercase; color: var(--clay-bright); margin: 0 0 12px; font-weight:500; }
   footer ul{ list-style:none; margin:0; padding:0; }
-  footer li{ margin-bottom: 10px; font-size: .88rem; color: var(--paper-soft); }
-  footer a{ font-size: .88rem; color: var(--paper-soft); transition: color .25s var(--ease); }
+  footer li{ margin-bottom: 8px; font-size: .86rem; color: var(--paper-soft); }
+  footer li:last-child{ margin-bottom:0; }
+  footer a{ font-size: .86rem; color: var(--paper-soft); transition: color .25s var(--ease); }
   footer a:hover{ color: var(--clay-bright); }
-  .footer-bottom{ padding-top: 22px; font-family: var(--mono); font-size: .7rem; color: var(--paper-soft); }
-
-  @media (max-width: 980px){ .footer-grid{ grid-template-columns: 1fr 1fr 1fr; } }
-  @media (max-width: 640px){ .footer-grid{ grid-template-columns: 1fr 1fr; } }
+  .footer-bottom{ padding-top: 18px; text-align:center; font-family: var(--mono); font-size: .68rem; color: var(--paper-soft); }
 
   @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } [data-reveal]{ transition: opacity .3s linear; transform:none; } }
+
+  /* ================= MOBILE-WIDE MARGIN SAFETY ================= */
+  @media (max-width: 640px){
+    .shell{ padding: 0 20px; }
+    .footprint-frame{ padding: 0 20px; }
+  }
+
+  /* ================= MOBILE SECTION BREATHING ROOM ================= */
+  /* A little extra vertical space between the stacked sections on small
+     screens — subtle, not a redesign of the section rhythm used on
+     larger viewports. */
+  @media (max-width: 640px){
+    .hero{ padding-top: calc(var(--nav-h) + clamp(48px, 9vw, 72px)); }
+    .footprint-section{ padding-top: clamp(80px, 12vw, 104px); padding-bottom: clamp(72px, 11vw, 96px); }
+    .capabilities-section{ padding-top: clamp(96px, 15vw, 128px); padding-bottom: clamp(80px, 12vw, 104px); }
+    .proven-section{ padding-top: clamp(80px, 12vw, 108px); padding-bottom: clamp(80px, 12vw, 108px); }
+    .cta-band{ padding-top: clamp(80px, 12vw, 104px); padding-bottom: clamp(80px, 12vw, 104px); }
+  }
 </style>
 </head>
 <body>
 
 <nav class="site-nav" id="siteNav" aria-label="Primary">
-  <div class="nav-inner">
-    <div class="nav-center">
-      <a class="nav-logo" href="index.html" data-page="home" aria-label="APS Land Services — Home">
+  <ul class="nav-menu-centered">
+    <li><a class="nav-link active" href="index.html">Home</a></li>
+    <li><a class="nav-link" href="about.html">About</a></li>
+    <li>
+      <a class="nav-logo" href="index.html" aria-label="APS Land Services — Home">
         <img class="nav-logo-img" src="assets/APSLand_Logo.png" alt="APS Land" decoding="async" onerror="this.style.display='none';document.getElementById('navLogoFallback').style.display='inline'">
         <span id="navLogoFallback" class="nav-logo-fallback" style="display:none;">APS Land</span>
       </a>
-      <ul class="nav-links">
-        <li><a href="index.html" data-page="home" class="current">Home</a></li>
-        <li><a href="services.html" data-page="services">Services</a></li>
-        <li><a href="about.html" data-page="about">About</a></li>
-        <li><a href="contact.html" data-page="contact">Contact</a></li>
-      </ul>
-    </div>
-    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navMobilePanel">
-      <span class="nav-toggle-bar"></span>
-      <span class="nav-toggle-bar"></span>
-      <span class="nav-toggle-bar"></span>
-    </button>
-  </div>
-</nav>
-<div class="nav-mobile-panel" id="navMobilePanel">
-  <ul>
-    <li><a href="index.html" data-page="home" class="current">Home</a></li>
-    <li><a href="services.html" data-page="services">Services</a></li>
-    <li><a href="about.html" data-page="about">About</a></li>
-    <li><a href="contact.html" data-page="contact">Contact</a></li>
+    </li>
+    <li><a class="nav-link" href="services.html">Services</a></li>
+    <li><a class="nav-link" href="contact.html">Contact</a></li>
   </ul>
-</div>
+</nav>
 
 <!-- ================= 1. HERO ================= -->
 <header class="hero shell" data-reveal>
@@ -433,22 +466,20 @@
   </div>
 
   <!-- Zone 2 — Purpose: WHY APS exists -->
-  <p class="hero-purpose">Supporting the energy and exploration projects that power America.</p>
+  <p class="hero-purpose">Supporting the energy, exploration, and infrastructure projects that power America.</p>
 
-  <!-- Zone 3 — Capabilities: WHAT APS does -->
+  <!-- Zone 3 — Capabilities: WHAT APS does. Same order and naming as
+       the "Our Capabilities" timeline on services.html, each linking
+       straight to that service's description. -->
   <div class="hero-capabilities">
-    <span>Seismic Permitting</span>
+    <a class="hero-cap-link" href="services.html#title-ownership">Title &amp; Ownership</a>
     <span class="hero-sep" aria-hidden="true"></span>
-    <span>Right-of-Way Acquisition</span>
+    <a class="hero-cap-link" href="services.html#gis-services">GIS Services</a>
     <span class="hero-sep" aria-hidden="true"></span>
-    <span>Title Curative</span>
+    <a class="hero-cap-link" href="services.html#seismic-permitting">Seismic Permitting</a>
     <span class="hero-sep" aria-hidden="true"></span>
-    <span>GIS Services</span>
+    <a class="hero-cap-link" href="services.html#right-of-way">Right-of-Way Acquisition</a>
   </div>
-
-  <!-- Zone 4 — Utility: landowner pathway, quiet corner nav -->
-  <!-- Placeholder anchor — About page landowner section ID to be finalized separately -->
-  <a class="hero-landowner" href="about.html#landowner">Landowner? <span>Learn about our role</span> <span class="arrow">→</span></a>
 </header>
 
 <!-- ================= 2. A NATIONWIDE FOOTPRINT ================= -->
@@ -461,7 +492,7 @@
     <div class="footprint-stats" data-reveal>
       <span class="stat">
         <strong>23 States</strong>
-        <small>permitted to date, plus project experience in Alberta and Saskatchewan</small>
+        <small>plus project experience in Alberta and Saskatchewan</small>
       </span>
       <span class="stat-divider" aria-hidden="true"></span>
       <span class="stat">
@@ -476,12 +507,14 @@
     </div>
 
     <div class="map-canvas-wrap" data-reveal>
-      <div id="map-state-panel" class="map-state-panel">
-        <span id="msp-name" class="msp-name"></span>
-        <span id="msp-county" class="msp-county"></span>
-      </div>
       <div class="map-stage">
         <div id="us-map" class="map-canvas" aria-label="Interactive map of the contiguous United States where APS Land Services operates"></div>
+        <div id="map-state-panel" class="map-state-panel">
+          <span id="msp-hq-label" class="msp-hq-label">Headquarters</span>
+          <span id="msp-hq-rule" class="msp-hq-rule" aria-hidden="true"></span>
+          <span id="msp-name" class="msp-name"></span>
+          <span id="msp-county" class="msp-county"></span>
+        </div>
       </div>
     </div>
   </div>
@@ -490,7 +523,6 @@
 <!-- ================= 3. CAPABILITIES & COMMITMENTS ================= -->
 <section class="capabilities-section shell" id="capabilities">
   <div class="section-head-center" data-reveal>
-    <span class="eyebrow">Capabilities &amp; Commitments</span>
     <h2>We get the details right.</h2>
   </div>
 
@@ -504,26 +536,25 @@
         <li>GIS Services</li>
       </ul>
       <p class="cap-close">One team. Direct oversight. Continuous reporting.</p>
+      <a class="cta-btn" href="services.html">Explore Services <span class="arrow">→</span></a>
     </div>
 
     <div class="cap-card" data-reveal>
-      <h3>Guaranteed Turnkey Pricing</h3>
-      <p class="cap-contrast">Other firms estimate. APS guarantees.</p>
+      <h3>Turnkey Pricing</h3>
+      <p class="cap-contrast" style="text-align: center;">Other firms estimate. APS guarantees.</p>
       <p class="cap-close">One project. One price. No surprises.</p>
+      <a class="cta-btn" href="contact.html">Get a Quote <span class="arrow">→</span></a>
     </div>
 
     <div class="cap-card" data-reveal>
-      <h3>Safety Without Compromise</h3>
+      <h3>Safety &amp; Compliance</h3>
       <ul class="cap-list">
         <li>Safety Program Manual</li>
         <li>Injury &amp; Illness Prevention Program</li>
+        <li>Active Member of ISNetworld</li>
       </ul>
       <p class="cap-close">Personal accountability. Incident prevention. No exceptions.</p>
-      <!-- ISNetworld badge asset not yet provided — placeholder mark below -->
-      <div class="isn-badge-placeholder">
-        <span class="isn-badge-mark" aria-hidden="true">ISN</span>
-        <span class="isn-caption">Active Member of ISNetworld</span>
-      </div>
+      <a class="cta-btn" href="contact.html">Contact Us <span class="arrow">→</span></a>
     </div>
   </div>
 </section>
@@ -531,25 +562,26 @@
 <!-- ================= 4. PROVEN EXPERIENCE ================= -->
 <section class="proven-section shell" id="clients">
   <div class="section-head-center" data-reveal>
-    <span class="eyebrow">Proven Experience</span>
     <h2>Trusted to represent our clients in the field.</h2>
   </div>
 
   <div class="marquee-stack" data-reveal>
-    <div class="marquee-viewport">
+    <div class="marquee-viewport" id="marqueeViewportA">
       <div class="marquee-track" id="marqueeTrackA"><!-- populated by JS --></div>
     </div>
-    <div class="marquee-viewport">
+    <div class="marquee-viewport" id="marqueeViewportB">
       <div class="marquee-track marquee-track-reverse" id="marqueeTrackB"><!-- populated by JS --></div>
     </div>
   </div>
 </section>
 
-<!-- ================= 5. UNIVERSAL CTA + FOOTER ================= -->
+<!-- ================= 5. CTA + FOOTER ================= -->
 <section class="cta-band">
   <div class="shell cta-inner" data-reveal>
     <h2>Let's get to work.</h2>
-    <a class="cta-btn" href="contact.html">Contact APS <span class="arrow">→</span></a>
+    <div class="cta-actions">
+      <a class="cta-btn" href="contact.html">Contact Us <span class="arrow">→</span></a>
+    </div>
   </div>
 </section>
 
@@ -565,8 +597,8 @@
         <h4>Navigation</h4>
         <ul>
           <li><a href="index.html">Home</a></li>
-          <li><a href="services.html">Services</a></li>
           <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
@@ -574,20 +606,13 @@
         <h4>Contact</h4>
         <ul>
           <li><a href="tel:+13039035873">303-903-5873</a></li>
-          <li><a href="mailto:contact@apsland.com">contact@apsland.com</a></li>
+          <li><a href="mailto:allstatepermit@allstatepermit.com">allstatepermit@allstatepermit.com</a></li>
         </ul>
       </div>
       <div>
         <h4>Headquarters</h4>
         <ul>
           <li>Cache Valley, Utah</li>
-        </ul>
-      </div>
-      <div>
-        <h4>Landowners</h4>
-        <ul>
-          <li>Contacted by APS?</li>
-          <li><a href="about.html#landowner">Landowner Information →</a></li>
         </ul>
       </div>
     </div>
@@ -599,13 +624,6 @@
 
 <script>
 (function(){
-  var CURRENT_PAGE = 'home';
-
-  /* Prevent the browser from restoring a mid-page scroll position when
-     the logo forces a reload — the click handler below always wants the
-     visitor to land back at the very top of the home page. */
-  if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
-
   var nav = document.getElementById('siteNav');
   function onScroll(){ nav.classList.toggle('scrolled', window.scrollY > 12); }
   document.addEventListener('scroll', onScroll, { passive:true });
@@ -624,55 +642,43 @@
     reveals.forEach(function(el){ el.classList.add('in-view'); });
   }
 
-  /* Nav behavior: logo always hard-navigates (forces reload even if
-     already on Home so the entrance animation can replay). Clicking it
-     on the home page snaps the viewport to the top first, then reloads
-     with scroll restoration disabled so the visitor lands at the very
-     top of the fresh page. Home/Services/About soft-scroll to top if
-     already on that page, hard nav otherwise. Contact always hard-navs
-     (default anchor behavior, no handler needed). */
+  if('scrollRestoration' in history){ history.scrollRestoration = 'manual'; }
+
+  /* Logo: always a full, hard refresh of the site — never an in-page
+     scroll, even when already on the homepage. */
   var logo = document.querySelector('.nav-logo');
   logo.addEventListener('click', function(e){
-    if (CURRENT_PAGE === 'home') {
-      e.preventDefault();
-      window.scrollTo(0, 0);
-      window.location.reload();
-    }
-    /* else: default navigation to index.html proceeds, landing at top */
+    e.preventDefault();
+    window.location.href = logo.getAttribute('href');
+    window.location.reload();
   });
 
-  var samePageLinks = document.querySelectorAll('a[data-page="home"]');
-  samePageLinks.forEach(function(link){
-    if (link.classList.contains('nav-logo')) return;
-    link.addEventListener('click', function(e){
-      e.preventDefault();
-      closeMobileNav();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  });
-
-  /* Mobile menu toggle */
-  var toggle = document.getElementById('navToggle');
-  var mobilePanel = document.getElementById('navMobilePanel');
-  function closeMobileNav(){
-    toggle.setAttribute('aria-expanded', 'false');
-    mobilePanel.classList.remove('open');
+  /* Other nav links: if the link points at the page we're already on,
+     do a smooth scroll back to the top instead of reloading. If it
+     points elsewhere, let the browser navigate normally. */
+  function samePage(href){
+    var target = document.createElement('a');
+    target.href = href;
+    var targetPath = target.pathname.replace(/\/index\.html$/, '/').replace(/\/$/, '') || '/';
+    var herePath = window.location.pathname.replace(/\/index\.html$/, '/').replace(/\/$/, '') || '/';
+    return targetPath === herePath;
   }
-  toggle.addEventListener('click', function(){
-    var open = toggle.getAttribute('aria-expanded') === 'true';
-    toggle.setAttribute('aria-expanded', open ? 'false' : 'true');
-    mobilePanel.classList.toggle('open', !open);
-  });
-  mobilePanel.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click', function(){ closeMobileNav(); });
+  document.querySelectorAll('.nav-link').forEach(function(link){
+    link.addEventListener('click', function(e){
+      var href = link.getAttribute('href');
+      if(samePage(href)){
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
   });
 
   /* Client marquee — placeholder text wordmarks; swap for real logo
      image assets when the client uploads them (e.g. { name:'Devon',
      img:'logos/devon.png' }). */
   var CLIENTS_ROW_A = [
-    'Anadarko','Apache','Batelle','Charger Exploration','ConocoPhillips',
-    'Dawson Geophysical','Denbury','Devon','EOG Resources','Geokinetiks',
+    'ConocoPhillips','Dawson Geophysical','EOG Resources','Anadarko','Apache',
+    'Batelle','Charger Exploration','Denbury','Devon','Geokinetiks',
     'Global Geophysical','Interstate Exploration','Marathon Oil','Microseismic','Noble Energy'
   ];
   var CLIENTS_ROW_B = [
@@ -698,6 +704,121 @@
   }
   buildTrack(document.getElementById('marqueeTrackA'), CLIENTS_ROW_A);
   buildTrack(document.getElementById('marqueeTrackB'), CLIENTS_ROW_B);
+
+  /* Marquee: driven entirely by transform, never by native scroll — so
+     there is no scrollbar to show. Each track auto-advances every
+     frame; clicking/touching and dragging (PC: mouse-drag, mobile:
+     thumb) overrides that for the duration of the interaction and can
+     send it either direction, with a flick carrying momentum on
+     release. Merely hovering with a mouse does nothing — only an
+     actual press/touch takes over. Once the drag or flick settles, it
+     eases back into normal auto-advance from wherever it ended up. */
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function setupMarquee(viewport, track, direction, durationSeconds){
+    if(!viewport || !track) return;
+    var half = track.scrollWidth / 2 || 1;
+    var autoSpeed = reduceMotion ? 0 : (half / (durationSeconds * 60)); // px per frame
+    var offset = 0;            // current position, wrapped into [0, half)
+    var momentum = 0;          // px/frame carried from a flick, decays to 0
+    var isDown = false;
+    var lastX = 0, lastT = 0, lastDx = 0;
+
+    function wrap(){
+      offset = offset % half;
+      if(offset < 0) offset += half;
+    }
+    function render(){
+      track.style.transform = 'translate3d(' + (-offset) + 'px,0,0)';
+    }
+
+    function frame(){
+      if(isDown){
+        // position already driven by pointermove
+      } else if(Math.abs(momentum) > 0.05){
+        offset -= momentum;
+        momentum *= 0.94;
+      } else {
+        momentum = 0;
+        offset += direction * autoSpeed;
+      }
+      wrap();
+      render();
+      requestAnimationFrame(frame);
+    }
+
+    viewport.addEventListener('pointerdown', function(e){
+      isDown = true;
+      momentum = 0;
+      lastX = e.clientX; lastT = performance.now(); lastDx = 0;
+      viewport.classList.add('dragging');
+      if(viewport.setPointerCapture){ try{ viewport.setPointerCapture(e.pointerId); }catch(err){} }
+    });
+    viewport.addEventListener('pointermove', function(e){
+      if(!isDown) return;
+      var now = performance.now();
+      var dx = e.clientX - lastX;
+      offset -= dx; // drag right -> content follows to the right
+      wrap();
+      render();
+      var dt = Math.max(1, now - lastT);
+      lastDx = dx / dt; // px per ms, most recent movement only
+      lastX = e.clientX; lastT = now;
+    });
+    function endDrag(){
+      if(!isDown) return;
+      isDown = false;
+      viewport.classList.remove('dragging');
+      // Convert the last flick velocity (px/ms) into a per-frame
+      // momentum, matching the drag's own convention (offset -= dx).
+      momentum = lastDx * 16.7;
+    }
+    viewport.addEventListener('pointerup', endDrag);
+    viewport.addEventListener('pointercancel', endDrag);
+    viewport.addEventListener('pointerleave', function(){ if(isDown) endDrag(); });
+
+    requestAnimationFrame(frame);
+
+    return {
+      recalc: function(){ half = track.scrollWidth / 2 || 1; autoSpeed = reduceMotion ? 0 : (half / (durationSeconds * 60)); }
+    };
+  }
+
+  var marqueeA = setupMarquee(document.getElementById('marqueeViewportA'), document.getElementById('marqueeTrackA'), 1, 78);
+  var marqueeB = setupMarquee(document.getElementById('marqueeViewportB'), document.getElementById('marqueeTrackB'), -1, 86);
+  window.addEventListener('resize', function(){
+    if(marqueeA) marqueeA.recalc();
+    if(marqueeB) marqueeB.recalc();
+  });
+
+  /* ---- Map: HQ label + reset-on-click-away ----
+     us-map.js owns hover/pin state for state paths. Here we only:
+     (a) toggle the "Headquarters" eyebrow when the HQ marker itself
+         is the active target, and (b) reset any pinned selection back
+         to plain hover mode when the user clicks/taps outside the map. */
+  var mapStage = document.querySelector('.map-stage');
+  var statePanel = document.getElementById('map-state-panel');
+  if(mapStage && statePanel){
+    mapStage.addEventListener('mouseover', function(e){
+      var hq = e.target.closest('.hq-marker');
+      var isState = e.target.closest('.map-canvas path');
+      if(hq){ statePanel.classList.add('msp-hq'); }
+      else if(isState){ statePanel.classList.remove('msp-hq'); }
+    });
+    mapStage.addEventListener('click', function(e){
+      var hq = e.target.closest('.hq-marker');
+      var isState = e.target.closest('.map-canvas path');
+      if(hq){ statePanel.classList.add('msp-hq'); }
+      else if(isState){ statePanel.classList.remove('msp-hq'); }
+    });
+
+    document.addEventListener('click', function(e){
+      if(!mapStage.contains(e.target)){
+        document.querySelectorAll('.pinned').forEach(function(el){ el.classList.remove('pinned'); });
+        statePanel.classList.remove('msp-visible', 'msp-hq');
+      }
+    });
+  }
 })();
 </script>
 <script src="assets/us-map.js" defer></script>
